@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>People</title>
+<!--    <link rel="stylesheet" href="sources/style.css" >-->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-brand mb-0 h1"></span>
+    </nav>
+    <p class="display-4">Table for people</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Fullname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
+            <th scope="col">Profession</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in people %}
+            <tr>
+               <td class="c2">{{item.fullname}}</td>
+               <td class="c3">{{item.email}}</td>
+               <td class="c4"><SPAN>{{item.age}}</SPAN></td>
+               <td class="c5"><SPAN>{{item.profession}}</SPAN></td>
+               <td class="c6">
+                    <form action="/people/{{ item.id }}" method="put" role="form">
+                        <input type="hidden" id="_id" name="_id" value="{{ item['_id'] }}">
+                        <button type="submit"  class="ui red button" id="edit_{{ item['_id'] }}">
+                        Edit
+                        </button>
+                    </form>
+               </td>
+            </tr>
+          {% endfor%}
+        </tbody>
+       </table>
+</div>
+</body>
+</html>

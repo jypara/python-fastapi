@@ -41,7 +41,7 @@ def people_helper(people) -> dict:
 
 async def retrieve_people():
     peoples = []
-    async for people in people_collection.find():
+    for people in people_collection.find():
         peoples.append(people_helper(people))
     return peoples
 
@@ -55,7 +55,7 @@ async def add_people(people_data: dict) -> dict:
 
 # Retrieve a people with a matching ID
 async def retrieve_person(id: str) -> dict:
-    people = await people_collection.find_one({"_id": ObjectId(id)})
+    people = people_collection.find_one({"_id": ObjectId(id)})
     if people:
         return people_helper(people)
 
@@ -63,11 +63,13 @@ async def retrieve_person(id: str) -> dict:
 # Update a people with a matching ID
 async def update_people(id: str, data: dict):
     # Return false if an empty request body is sent.
-    if len(data) < 1:
+    print(data)
+    if data == None:
         return False
-    people = await people_collection.find_one({"_id": ObjectId(id)})
+    people = people_collection.find_one({"_id": ObjectId(id)})
+    print(people + "***********-----------+++++++++++++++++++++++++++++++#################%%%%%%%%%%%%%%%%%")
     if people:
-        updated_people = await people_collection.update_one(
+        updated_people = people_collection.update_one(
             {"_id": ObjectId(id)}, {"$set": data}
         )
         if updated_people:
